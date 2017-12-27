@@ -9,6 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    let myLayer: CALayer = .init()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -25,7 +26,8 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         //addBasicRectangleAnimation()
         //animateColorChange(view: self.view, colors: [self.view.backgroundColor!.cgColor, UIColor.brown.cgColor])
-        addBasicRectangleAnimation2()
+        //addBasicRectangleAnimation2()
+        whatFinallyWorks()
     }
     
     func addBasicRectangle(){
@@ -74,6 +76,35 @@ class ViewController: UIViewController {
         bgAnim.repeatCount = 0
         bgAnim.duration = 3.0
         view.layer.add(bgAnim, forKey: nil)
+    }
+    
+    func leftToptoRightBottomFillingAnimation(){
+        let vv = UIView()
+        vv.backgroundColor = UIColor.brown
+        self.view.addSubview(vv)
+        UIView.animate(withDuration: 1.0) {
+            vv.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+        }
+    }
+    
+    func whatFinallyWorks() {
+        myLayer.backgroundColor = UIColor.red.cgColor
+        self.view.layer.addSublayer(myLayer)
+        animateFilling(to: self.view)
+    }
+    
+    func animateFilling(to view:UIView)
+    {
+        var mFrame = CGRect(x: 0, y: view.frame.size.height, width: view.frame.size.width, height: 0)
+        myLayer.frame = mFrame
+        let fillingAnim = CABasicAnimation(keyPath: "bounds")
+        fillingAnim.fillMode = kCAFillModeForwards
+        fillingAnim.fromValue = mFrame
+        fillingAnim.duration = 2
+        fillingAnim.isRemovedOnCompletion = false
+        mFrame.size.height = 1000
+        fillingAnim.toValue = mFrame
+        myLayer.add(fillingAnim, forKey: nil)
     }
 }
 
