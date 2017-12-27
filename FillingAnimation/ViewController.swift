@@ -24,10 +24,11 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //addBasicRectangleAnimation()
+        //addBasicRectangleAnimation0()
         //animateColorChange(view: self.view, colors: [self.view.backgroundColor!.cgColor, UIColor.brown.cgColor])
         //addBasicRectangleAnimation2()
-        whatFinallyWorks()
+        //whatFinallyWorks()
+        addBasicRectangleAnimation()
     }
     
     func addBasicRectangle(){
@@ -42,6 +43,21 @@ class ViewController: UIViewController {
     }
     
     func addBasicRectangleAnimation() {
+        let vv = UIView(frame: CGRect(x: 0, y: self.view.bounds.size.height, width: self.view.bounds.size.width, height: 0))
+        
+        vv.backgroundColor = UIColor.brown
+        
+        self.view.addSubview(vv)
+        
+        UIView.animate(withDuration: 5.0) {
+            
+            
+            vv.frame = CGRect(x: 0, y: self.view.bounds.size.height / 3.0, width: self.view.bounds.size.width, height: self.view.bounds.size.height * 2 / 3.0)
+            
+        }
+    }
+    
+    func addBasicRectangleAnimation0() {
         let expandAnimation: CABasicAnimation = CABasicAnimation(keyPath: "path")
         expandAnimation.fromValue = UIBezierPath(rect: CGRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0))
         expandAnimation.toValue = UIBezierPath(rect: CGRect(x: 0.0, y: 0.0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
